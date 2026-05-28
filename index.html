@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>美观页面示例</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .page {
+      min-height: 100vh;
+      background: #0d0d0d;
+      color: #f0ede6;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      gap: 3rem;
+    }
+    .badge {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #a89070;
+      border: 1px solid #a89070;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .hero {
+      text-align: center;
+      max-width: 560px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.15;
+      color: #f0ede6;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: #c8a97e;
+    }
+    .hero p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #888;
+      line-height: 1.8;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 640px;
+    }
+    .card {
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: #a89070;
+      transform: translateY(-4px);
+    }
+    .card .icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: #f0ede6;
+      margin-bottom: 0.4rem;
+    }
+    .card p {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    .cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #c8a97e;
+      color: #0d0d0d;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      background: transparent;
+      color: #f0ede6;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: #a89070; }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: #a89070;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <span class="badge">欢迎光临</span>
+    <div class="hero">
+      <h1>设计，源于<em>细节</em>的力量</h1>
+      <p>简洁不是缺席，而是恰到好处的存在。每一个像素，每一行文字，都在诉说一个故事。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">✦</div>
+        <h3>精致排版</h3>
+        <p>字体即态度，间距即呼吸</p>
+      </div>
+      <div class="card">
+        <div class="icon">◈</div>
+        <h3>克制配色</h3>
+        <p>深夜金棕，低调而有力</p>
+      </div>
+      <div class="card">
+        <div class="icon">◎</div>
+        <h3>流畅交互</h3>
+        <p>悬停微动，细节见真章</p>
+      </div>
+    </div>
+    <div class="cta">
+      <button class="btn-primary">开始探索</button>
+      <button class="btn-ghost">了解更多</button>
+    </div>
+  </div>
+</body>
+</html>
