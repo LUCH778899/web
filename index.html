@@ -118,37 +118,612 @@
       background: #a89070;
       opacity: 0.5;
     }
+    /* --- Theme Toggle --- */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem; right: 1.5rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid #333;
+      background: transparent;
+      color: #f0ede6;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+    }
+    .theme-toggle:hover { border-color: #a89070; color: #a89070; }
+    body.light .theme-toggle { border-color: #ccc; color: #333; }
+    body.light .theme-toggle:hover { border-color: #c8a97e; color: #c8a97e; }
+    /* --- Light Theme --- */
+    body.light .page { background: #faf8f5; color: #1a1a1a; }
+    body.light .hero h1 { color: #1a1a1a; }
+    body.light .hero p { color: #666; }
+    body.light .card { background: #fff; border-color: #e5e0d8; }
+    body.light .card h3 { color: #1a1a1a; }
+    body.light .card p { color: #777; }
+    body.light .card.active { background: #fffcf5; }
+    body.light .btn-ghost { color: #1a1a1a; border-color: #ccc; }
+    body.light .modal-overlay { background: rgba(250,248,245,0.92); }
+    body.light .modal { background: #fff; color: #1a1a1a; border-color: #e5e0d8; }
+    body.light .modal h2 { color: #1a1a1a; }
+    body.light .stats-section { background: #fff; border-color: #e5e0d8; }
+    body.light .stat-value { color: #c8a97e; }
+    body.light .form-section { background: #fff; border-color: #e5e0d8; }
+    body.light .input-field { background: #faf8f5; border-color: #e5e0d8; color: #1a1a1a; }
+    body.light .input-field:focus { border-color: #c8a97e; }
+    body.light .toast { background: #fff; color: #1a1a1a; }
+    body.light .gallery-item { border-color: #e5e0d8; }
+    /* --- Modal --- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(13,13,13,0.92);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      transform: translateY(20px);
+      transition: transform 0.35s;
+    }
+    .modal-overlay.show .modal { transform: translateY(0); }
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #f0ede6;
+      margin-bottom: 1rem;
+    }
+    .modal p {
+      line-height: 1.8;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      background: none; border: none;
+      color: #666; font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: #c8a97e; }
+    /* --- Stats Section --- */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 640px;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 0.5rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #c8a97e;
+      transition: color 0.3s;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.3rem;
+    }
+    /* --- Form Section --- */
+    .form-section {
+      width: 100%;
+      max-width: 640px;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+    .form-row > * { flex: 1; }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .field-group label {
+      font-size: 0.75rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .input-field {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #f0ede6;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .input-field:focus { border-color: #a89070; }
+    .input-field.error { border-color: #e05555; }
+    .field-error {
+      font-size: 0.7rem;
+      color: #e05555;
+      display: none;
+    }
+    .field-error.show { display: block; }
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #f0ede6;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    /* --- Toast --- */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .toast {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      color: #f0ede6;
+      font-size: 0.85rem;
+      animation: toastIn 0.4s, toastOut 0.4s 2.6s forwards;
+      max-width: 320px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .toast.success { border-left: 3px solid #4caf50; }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(60px); }
+    }
+    /* --- Gallery --- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      width: 100%;
+      max-width: 640px;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item:hover {
+      border-color: #a89070;
+      transform: translateY(-3px);
+    }
+    .gallery-inner {
+      font-size: 2.5rem;
+      opacity: 0.5;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .gallery-item:hover .gallery-inner {
+      opacity: 0.9;
+      transform: scale(1.15);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0.6rem;
+      font-size: 0.7rem;
+      color: #a89070;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+    /* --- Reveal on Scroll --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* --- Particle Canvas --- */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    section, .page > * { position: relative; z-index: 1; }
+    /* --- Back to Top --- */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem; left: 2rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid #333;
+      background: rgba(13,13,13,0.85);
+      color: #f0ede6;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { border-color: #a89070; color: #a89070; }
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .cards, .gallery, .stats-section { grid-template-columns: 1fr; }
+      .form-row { flex-direction: column; }
+      .modal { padding: 1.5rem; }
+    }
+    /* --- Card Active --- */
+    .card {
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, background 0.3s;
+    }
+    .card.active {
+      border-color: #a89070;
+      background: #1f1f1f;
+    }
+    .card .extra {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s, margin 0.4s;
+      color: #888;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+    .card.active .extra {
+      max-height: 120px;
+      margin-top: 0.8rem;
+    }
+    /* --- Section Title --- */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #a89070;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
+  <button class="theme-toggle" id="themeToggle" title="切换主题">&#9728;</button>
+  <button class="back-to-top" id="backToTop" title="回到顶部">&#8593;</button>
+  <div class="toast-container" id="toastContainer"></div>
+
   <div class="page">
-    <span class="badge">欢迎光临</span>
-    <div class="hero">
+    <span class="badge reveal">欢迎光临</span>
+    <div class="hero reveal">
       <h1>设计，源于<em>细节</em>的力量</h1>
       <p>简洁不是缺席，而是恰到好处的存在。每一个像素，每一行文字，都在诉说一个故事。</p>
     </div>
-    <div class="divider"></div>
-    <div class="cards">
+    <div class="divider reveal"></div>
+    <div class="cards reveal">
       <div class="card">
         <div class="icon">✦</div>
         <h3>精致排版</h3>
         <p>字体即态度，间距即呼吸</p>
+        <div class="extra">从衬线到无衬线，字重与行长经过精密计算。每一处空白都是精心留出的呼吸口，让阅读成为一种享受。</div>
       </div>
       <div class="card">
         <div class="icon">◈</div>
         <h3>克制配色</h3>
         <p>深夜金棕，低调而有力</p>
+        <div class="extra">黑底金棕的配色传递沉稳与奢华，色彩系统严格控制在三色以内，让视觉重心始终聚焦在内容本身。</div>
       </div>
       <div class="card">
         <div class="icon">◎</div>
         <h3>流畅交互</h3>
         <p>悬停微动，细节见真章</p>
+        <div class="extra">从按下到反馈，每一个过渡动画都遵循自然的缓动曲线。微交互让界面不再冰冷，赋予每个操作以生命力。</div>
       </div>
     </div>
-    <div class="cta">
-      <button class="btn-primary">开始探索</button>
-      <button class="btn-ghost">了解更多</button>
+
+    <span class="section-label reveal">数据一览</span>
+    <div class="stats-section reveal">
+      <div class="stat-item">
+        <div class="stat-value" data-target="1280">0</div>
+        <div class="stat-label">设计项目</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" data-target="386">0</div>
+        <div class="stat-label">合作品牌</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" data-target="99">0</div>
+        <div class="stat-label">客户满意度 %</div>
+      </div>
+    </div>
+
+    <span class="section-label reveal">精选作品</span>
+    <div class="gallery reveal">
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9650;</span>
+        <span class="gallery-caption">品牌 VI 系统</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9674;</span>
+        <span class="gallery-caption">UI 界面设计</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9632;</span>
+        <span class="gallery-caption">包装设计</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9670;</span>
+        <span class="gallery-caption">插画创作</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9711;</span>
+        <span class="gallery-caption">动态视觉</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-inner">&#9733;</span>
+        <span class="gallery-caption">摄影后期</span>
+      </div>
+    </div>
+
+    <span class="section-label reveal">联系我们</span>
+    <div class="form-section reveal" id="contactForm">
+      <div class="form-title">开始你的设计之旅</div>
+      <div class="form-row">
+        <div class="field-group">
+          <label>姓名</label>
+          <input class="input-field" type="text" placeholder="你的名字" id="nameInput">
+          <span class="field-error" id="nameError">请输入姓名</span>
+        </div>
+        <div class="field-group">
+          <label>邮箱</label>
+          <input class="input-field" type="email" placeholder="your@email.com" id="emailInput">
+          <span class="field-error" id="emailError">请输入有效邮箱</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>留言</label>
+        <textarea class="input-field" rows="3" placeholder="告诉我们你的想法..." id="messageInput"></textarea>
+        <span class="field-error" id="messageError">留言不能为空</span>
+      </div>
+      <div style="text-align:right">
+        <button class="btn-primary" type="submit" id="submitForm">提交留言</button>
+      </div>
+    </div>
+
+    <div class="cta reveal">
+      <button class="btn-primary" id="btnExplore">开始探索</button>
+      <button class="btn-ghost" id="btnMore">了解更多</button>
     </div>
   </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h2 id="modalTitle">探索更多</h2>
+      <p id="modalBody">我们相信，好的设计不是装饰，而是解决问题的方式。每一次点击、每一帧动画，都在拉近你与用户的距离。</p>
+      <button class="btn-primary" id="modalAction">立即体验</button>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ── Theme Toggle ──
+      var themeBtn = document.getElementById('themeToggle');
+      themeBtn.addEventListener('click', function() {
+        document.body.classList.toggle('light');
+        themeBtn.innerHTML = document.body.classList.contains('light') ? '&#9790;' : '&#9728;';
+        showToast(document.body.classList.contains('light') ? '已切换到浅色主题' : '已切换到深色主题');
+      });
+
+      // ── Modal ──
+      var modalOverlay = document.getElementById('modalOverlay');
+      var modalTitle = document.getElementById('modalTitle');
+      var modalBody = document.getElementById('modalBody');
+      var modalAction = document.getElementById('modalAction');
+      var modalClose = document.getElementById('modalClose');
+
+      function openModal(title, body, btnText) {
+        modalTitle.textContent = title;
+        modalBody.textContent = body;
+        modalAction.textContent = btnText || '确定';
+        modalOverlay.classList.add('show');
+      }
+      function closeModal() { modalOverlay.classList.remove('show'); }
+      modalClose.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
+      modalAction.addEventListener('click', function() { closeModal(); showToast('感谢你的探索！'); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+      // ── Button Handlers ──
+      document.getElementById('btnExplore').addEventListener('click', function() {
+        openModal('探索设计之旅', '这里是一段展示内容。你可以替换为图片、视频或任何你想要的交互内容。每一次展示，都是与用户的深度对话。', '了解更多');
+      });
+      document.getElementById('btnMore').addEventListener('click', function() {
+        document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+        showToast('已滚动至联系表单');
+      });
+
+      // ── Card Click to Expand ──
+      document.querySelectorAll('.card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          var wasActive = this.classList.contains('active');
+          document.querySelectorAll('.card').forEach(function(c) { c.classList.remove('active'); });
+          if (!wasActive) {
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // ── Gallery Click ──
+      document.querySelectorAll('.gallery-item').forEach(function(item, i) {
+        item.addEventListener('click', function() {
+          var caption = this.querySelector('.gallery-caption').textContent;
+          openModal(caption, '这是「' + caption + '」的详细介绍区域。在实际项目中，这里可以展示完整的设计案例、高清大图以及项目背后的故事。', '查看详情');
+        });
+      });
+
+      // ── Form Validation & Submit ──
+      document.getElementById('submitForm').addEventListener('click', function() {
+        var name = document.getElementById('nameInput');
+        var email = document.getElementById('emailInput');
+        var message = document.getElementById('messageInput');
+        var valid = true;
+
+        var nameErr = document.getElementById('nameError');
+        var emailErr = document.getElementById('emailError');
+        var msgErr = document.getElementById('messageError');
+
+        [name, email, message].forEach(function(el) { el.classList.remove('error'); });
+        [nameErr, emailErr, msgErr].forEach(function(el) { el.classList.remove('show'); });
+
+        if (!name.value.trim()) { name.classList.add('error'); nameErr.classList.add('show'); valid = false; }
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          email.classList.add('error'); emailErr.classList.add('show'); valid = false;
+        }
+        if (!message.value.trim()) { message.classList.add('error'); msgErr.classList.add('show'); valid = false; }
+
+        if (valid) {
+          showToast('留言提交成功，我们会尽快联系你！', 'success');
+          name.value = ''; email.value = ''; message.value = '';
+        }
+      });
+
+      // ── Toast ──
+      function showToast(msg, type) {
+        var container = document.getElementById('toastContainer');
+        var toast = document.createElement('div');
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.textContent = msg;
+        container.appendChild(toast);
+        setTimeout(function() {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 3100);
+      }
+
+      // ── Stats Counter ──
+      var statsAnimated = false;
+      function animateStats() {
+        if (statsAnimated) return;
+        statsAnimated = true;
+        document.querySelectorAll('.stat-value').forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-target'));
+          var current = 0;
+          var step = Math.ceil(target / 60);
+          var timer = setInterval(function() {
+            current += step;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = current.toLocaleString();
+          }, 20);
+        });
+      }
+
+      // ── Back to Top ──
+      var backBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        backBtn.classList.toggle('show', window.scrollY > 400);
+      });
+      backBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // ── Scroll Reveal + Stats Trigger ──
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            if (entry.target.querySelector('.stat-value')) animateStats();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+      // ── Particle Canvas ──
+      var canvas = document.getElementById('particles');
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var w, h;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (var i = 0; i < 50; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.4 + 0.1
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        var isLight = document.body.classList.contains('light');
+        particles.forEach(function(p) {
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.x < 0 || p.x > w) p.dx *= -1;
+          if (p.y < 0 || p.y > h) p.dy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = isLight ? 'rgba(168,144,112,' + p.opacity + ')' : 'rgba(200,169,126,' + p.opacity + ')';
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      // ── Init: reveal visible elements on load ──
+      setTimeout(function() {
+        document.querySelectorAll('.reveal').forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight) el.classList.add('visible');
+          if (el.querySelector('.stat-value')) animateStats();
+        });
+      }, 100);
+    })();
+  </script>
 </body>
 </html>
